@@ -9,6 +9,7 @@ function Book(title, author, pages, read, index){
     this.pages = pages;
     this.read = read;
     this.index = index;
+    this.status = "Mark As Read";
     this.info = function() {
         return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
     }
@@ -46,14 +47,25 @@ function displayLibrary(){
         card_read.classList.add('card-read');
         card_read.textContent = `Read: ${myLibrary[i].read}`;
 
-        const card_index = document.createElement('div');
-        card_index.classList.add('card-index');
-        card_index.textContent = `Index: ${i}`;
-
+        const card_finish_btn = document.createElement('button');
+        card_finish_btn.classList.add('finish-card-btn');
+        card_finish_btn.textContent = `${myLibrary[i].status}`;
 
         const remove_btn = document.createElement('button');
         remove_btn.classList.add('remove-card-btn');
         remove_btn.textContent = `Remove Card`;
+
+        card_finish_btn.addEventListener('click', () =>{
+            if (myLibrary[i].status == "Mark As Read"){
+                myLibrary[i].status = "Mark As Not Read";
+                myLibrary[i].read = "Not Yet Read"
+            } else{
+                myLibrary[i].status = "Mark As Read";
+                myLibrary[i].read = "Has Been Read"
+            }
+          
+            displayLibrary();
+        });
 
         remove_btn.addEventListener('click', () =>{
             myLibrary.splice(i, 1);
@@ -65,7 +77,7 @@ function displayLibrary(){
         newBook.appendChild(card_author);
         newBook.appendChild(card_page);
         newBook.appendChild(card_read);
-        newBook.appendChild(card_index);
+        newBook.appendChild(card_finish_btn);
         newBook.appendChild(remove_btn);
 
         card_container.appendChild(newBook);
