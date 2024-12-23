@@ -3,11 +3,12 @@
 
 const myLibrary = []
 
-function Book(title, author, pages, read){
+function Book(title, author, pages, read, index){
     this.title = title;
-    this.author =author;
+    this.author = author;
     this.pages = pages;
     this.read = read;
+    this.index = index;
     this.info = function() {
         return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
     }
@@ -17,6 +18,7 @@ function addBookToLibrary(title, author, pages, read){
 
     //obtain data to create a book then add to library
     const newBook = new Book(title, author, pages, read);
+    newBook.index = myLibrary.length;
     myLibrary.push(newBook);
 }
 
@@ -44,27 +46,41 @@ function displayLibrary(){
         card_read.classList.add('card-read');
         card_read.textContent = `Read: ${myLibrary[i].read}`;
 
+        const card_index = document.createElement('div');
+        card_index.classList.add('card-index');
+        card_index.textContent = `Index: ${i}`;
+
 
         const remove_btn = document.createElement('button');
         remove_btn.classList.add('remove-card-btn');
-        remove_btn.textContent = `Remove Card`
+        remove_btn.textContent = `Remove Card`;
+
+        remove_btn.addEventListener('click', () =>{
+            myLibrary.splice(i, 1);
+            console.log(myLibrary)
+            displayLibrary();
+        });
 
         newBook.appendChild(card_title);
         newBook.appendChild(card_author);
         newBook.appendChild(card_page);
         newBook.appendChild(card_read);
+        newBook.appendChild(card_index);
         newBook.appendChild(remove_btn);
 
-        card_container.appendChild(newBook)
+        card_container.appendChild(newBook);
 
     }
 
 }
+function removeCardFromLibrary(){
+
+}
 
 
-const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not yet read");
-const book2 = new Book("Harry Potter", "J.K Rowling", "400", "not yet read");
-const book3 = new Book("Twilight", "Stephenie Meyer", "200", "not yet read");
+const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not yet read", 0);
+const book2 = new Book("Harry Potter", "J.K Rowling", "400", "not yet read", 1);
+const book3 = new Book("Twilight", "Stephenie Meyer", "200", "not yet read", 2);
 
 const card_container = document.querySelector('.card-container');
 const remove_card_btn = document.querySelector('.remove-card-btn');
@@ -80,6 +96,7 @@ displayLibrary();
 const addBook_button = document.querySelector('.addBook');
 const form_container = document.querySelector('.form-container')
 const submit_btn = document.querySelector('.submit-btn')
+
 
 addBook_button.addEventListener('click', () => {
     //make appear a form container to fill out obtain new book info
@@ -114,3 +131,5 @@ submit_btn.addEventListener('click', (event) =>{
     addBookToLibrary(currentTitle, currentAuthor, currentPages, currentRead);
     displayLibrary();
 });
+
+
