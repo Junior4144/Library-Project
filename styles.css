@@ -13,7 +13,7 @@ body{
 
     display: grid;
     grid-template-columns: 1fr 5fr;
-    grid-template-rows: 100px minmax(550px  , auto) 50px;
+    grid-template-rows: 100px minmax(570px  , auto) 50px;
 
     grid-template-areas: 
     "sidebar header"
@@ -45,16 +45,27 @@ body{
     background-color: #d1d5db;
 
     padding:50px;
+    padding-top: 0;
     
 }
 .content-header{
     display:flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding:10px;
+    height:100px;
 }
+
 .content-title{
     font-size: 24px;
     font-weight: 600;
+}
+.form-container{
+    display:none;
+}
+form{
+    display:flex;
+    
 }
 .card-container{
     height: 100%;

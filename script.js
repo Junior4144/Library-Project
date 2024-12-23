@@ -21,7 +21,7 @@ function addBookToLibrary(title, author, pages, read){
 }
 
 function displayLibrary(){
-    
+    card_container.innerHTML = '';
 
     for (let i = 0; i < myLibrary.length; i++){
         //loop through myLibrary and should display array
@@ -42,12 +42,18 @@ function displayLibrary(){
 
         const card_read = document.createElement('div');
         card_read.classList.add('card-read');
-        card_read.textContent = `Read: ${myLibrary[i].read}`
+        card_read.textContent = `Read: ${myLibrary[i].read}`;
+
+
+        const remove_btn = document.createElement('button');
+        remove_btn.classList.add('remove-card-btn');
+        remove_btn.textContent = `Remove Card`
 
         newBook.appendChild(card_title);
         newBook.appendChild(card_author);
         newBook.appendChild(card_page);
         newBook.appendChild(card_read);
+        newBook.appendChild(remove_btn);
 
         card_container.appendChild(newBook)
 
@@ -61,13 +67,50 @@ const book2 = new Book("Harry Potter", "J.K Rowling", "400", "not yet read");
 const book3 = new Book("Twilight", "Stephenie Meyer", "200", "not yet read");
 
 const card_container = document.querySelector('.card-container');
+const remove_card_btn = document.querySelector('.remove-card-btn');
 
 
 myLibrary.push(book1)
 myLibrary.push(book2)
 myLibrary.push(book3)
 
-console.log(myLibrary)
 
 displayLibrary();
 
+const addBook_button = document.querySelector('.addBook');
+const form_container = document.querySelector('.form-container')
+const submit_btn = document.querySelector('.submit-btn')
+
+addBook_button.addEventListener('click', () => {
+    //make appear a form container to fill out obtain new book info
+    addBook_button.style.display = 'none'
+    form_container.style.display = 'block'
+
+
+});
+
+submit_btn.addEventListener('click', (event) =>{
+    event.preventDefault();
+    form_container.style.display = 'none';
+
+    addBook_button.style.display = 'inline-block';
+
+    const title = document.getElementById("title");
+    const currentTitle = title.value;
+    title.value = '';
+
+    const author = document.getElementById("author");
+    const currentAuthor = author.value;
+    author.value = '';
+
+    const pages = document.getElementById("pages");
+    const currentPages = pages.value;
+    pages.value = '';
+
+    const read = document.getElementById("read");
+    const currentRead = read.value;
+    read.value = '';
+
+    addBookToLibrary(currentTitle, currentAuthor, currentPages, currentRead);
+    displayLibrary();
+});
