@@ -3,14 +3,18 @@
 
 const myLibrary = []
 
-function Book(title, author, pages, read, index){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.index = index;
-    this.status = "Mark As Read";
-    this.info = function() {
+class Book {
+
+    constructor(title, author, pages, read, index){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.index = index;
+        this.status = "Mark As Read";
+    }
+   
+    info() {
         return `${this.title} by ${this.author}, ${this.pages}, ${this.read}`;
     }
 
@@ -57,11 +61,13 @@ function displayLibrary(){
 
         card_finish_btn.addEventListener('click', () =>{
             if (myLibrary[i].status == "Mark As Read"){
+
                 myLibrary[i].status = "Mark As Not Read";
-                myLibrary[i].read = "Not Yet Read"
+                myLibrary[i].read = "Has Been Read";
+
             } else{
                 myLibrary[i].status = "Mark As Read";
-                myLibrary[i].read = "Has Been Read"
+                myLibrary[i].read = "Not Yet Read";
             }
           
             displayLibrary();
@@ -90,9 +96,9 @@ function removeCardFromLibrary(){
 }
 
 
-const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "295", "not yet read", 0);
-const book2 = new Book("Harry Potter", "J.K Rowling", "400", "not yet read", 1);
-const book3 = new Book("Twilight", "Stephenie Meyer", "200", "not yet read", 2);
+const book1 = new Book("The Hobbit", "J.R.R. Tolkien", "295", "Not Yet Read", 0);
+const book2 = new Book("Harry Potter", "J.K Rowling", "400", "Not Yet Read", 1);
+const book3 = new Book("Twilight", "Stephenie Meyer", "200", "Not Yet Read", 2);
 
 const card_container = document.querySelector('.card-container');
 const remove_card_btn = document.querySelector('.remove-card-btn');
