@@ -23,34 +23,8 @@
                 <div class="content-title">
                     My Books
                 </div>
-                <div class="content-header-btn">
+                <div class="content-header-btn" >
                     <button class="addBook">Add Book</button>
-                    
-                    <div class="form-container">
-                        <form action="" method="get">
-
-                            <div>
-                                <label for="title">Title: </label>
-                                <input type="text" id="title">
-                            </div>
-                            <div>
-                                <label for="author">Author: </label>
-                                <input type="text" id="author">
-                            </div>
-                            <div>
-                                <label for="pages">Pages: </label>
-                                <input type="text" id="pages">
-                            </div>
-                            <div>
-                                <label for="read">Read: </label>
-                                <input type="text" id="read">
-                            </div>
-
-                            <button class="submit-btn" type="submit">Submit</button>
-
-                        </form>
-                 
-                    </div>
                 </div>
             </div>
             <div class="card-container">
@@ -59,6 +33,35 @@
             </div>
         </div>
 
+    </div>
+    <div class="form-container">
+        <form action="" novalidate>
+
+            <div>
+                <label for="title">Title: </label>
+                <input type="text" id="title" required>
+                <span class="error"></span>
+            </div>
+            <div>
+                <label for="author">Author: </label>
+                <input type="text" id="author" required>
+                <span class="error"></span>
+            </div>
+            <div>
+                <label for="pages">Pages: </label>
+                <input type="text" id="pages" required pattern="^[0-9]+$">
+                <span class="error"></span>
+            </div>
+            <div>
+                <label for="read">Read: </label>
+                <input type="text" id="read" required >
+                <span class="error"></span>
+            </div>
+
+            <button class="submit-btn" type="submit">Submit</button>
+
+        </form>
+ 
     </div>
     <div class="footer">
 

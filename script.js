@@ -124,30 +124,166 @@ addBook_button.addEventListener('click', () => {
 
 });
 
-submit_btn.addEventListener('click', (event) =>{
-    event.preventDefault();
-    form_container.style.display = 'none';
+const form = document.querySelector("form");
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('pages');
+const read = document.getElementById('read');
 
-    addBook_button.style.display = 'inline-block';
 
-    const title = document.getElementById("title");
-    const currentTitle = title.value;
-    title.value = '';
+function showTitleError(){
+    const titleError = document.querySelector('#title + span.error')
 
-    const author = document.getElementById("author");
-    const currentAuthor = author.value;
-    author.value = '';
+    if(title.validity.valid){
+        titleError.className = "error"
+        titleError.textContent = "";
+    }
+    else{
 
-    const pages = document.getElementById("pages");
-    const currentPages = pages.value;
-    pages.value = '';
+        if (title.validity.valueMissing){
+            titleError.textContent = "Title is missing"
+            
+        }
+        titleError.className = "error active"
+    }
 
-    const read = document.getElementById("read");
-    const currentRead = read.value;
-    read.value = '';
+}
+function showAuthorError(){
+    const authorError = document.querySelector('#author + span.error')
 
-    addBookToLibrary(currentTitle, currentAuthor, currentPages, currentRead);
-    displayLibrary();
+    if(author.validity.valid){
+        authorError.className = "error"
+        authorError.textContent = "";
+    }
+    else{
+
+        if (author.validity.valueMissing){
+            authorError.textContent = "Author is missing"
+            
+        }
+        authorError.className = "error active"
+    }
+
+}
+function showPagesError(){
+    const pageError = document.querySelector('#pages + span.error')
+
+    if(pages.validity.valid){
+        pageError.className = "error"
+        pageError.textContent = "";
+    }
+    else{
+
+        if (pages.validity.valueMissing){
+            pageError.textContent = "Pages is missing"
+            
+        }
+        else if(pages.validity.patternMismatch){
+            pageError.textContent = "Format incorrect"
+        }
+        pageError.className = "error active"
+    }
+
+}
+function showReadError(){
+    const readError = document.querySelector('#read + span.error')
+
+    if(read.validity.valid){
+        readError.className = "error"
+        readError.textContent = "";
+    }
+    else{
+
+        if (read.validity.valueMissing){
+            readError.textContent = "Read is missing"
+            
+        }
+        readError.className = "error active"
+    }
+
+}
+
+
+form.addEventListener('submit', (event) =>{
+
+    if(!title.validity.valid){
+        showTitleError();
+        event.preventDefault();
+    }
+    if(!author.validity.valid){
+        showAuthorError();
+        event.preventDefault();
+    }
+
+    if(!pages.validity.valid){
+        showPagesError();
+        event.preventDefault();
+    }
+
+    if(!read.validity.valid){
+        showReadError();
+        event.preventDefault();
+    }
+    if( title.validity.valid &&
+        author.validity.valid &&
+        pages.validity.valid &&
+        read.validity.valid){
+            
+            event.preventDefault();
+            const addBook_button = document.querySelector('.addBook');
+            const form_container = document.querySelector('.form-container')
+        
+        
+            form_container.style.display = 'none';
+        
+            addBook_button.style.display = 'inline-block';
+        
+            const title = document.getElementById("title");
+            const currentTitle = title.value;
+            title.value = '';
+        
+            const author = document.getElementById("author");
+            const currentAuthor = author.value;
+            author.value = '';
+        
+            const pages = document.getElementById("pages");
+            const currentPages = pages.value;
+            pages.value = '';
+        
+            const read = document.getElementById("read");
+            const currentRead = read.value;
+            read.value = '';
+        
+            addBookToLibrary(currentTitle, currentAuthor, currentPages, currentRead);
+            displayLibrary();
+        }
+
+
+
 });
 
+
+title.addEventListener('input', () =>{
+
+    showTitleError();
+    
+})
+
+author.addEventListener('input', () =>{
+
+    showAuthorError();
+    
+})
+
+pages.addEventListener('input', () =>{
+
+    showPagesError();
+    
+})
+
+read.addEventListener('input', () =>{
+
+    showReadError();
+    
+})
 

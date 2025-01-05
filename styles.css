@@ -10,7 +10,7 @@
 
 body{
 
-
+   
     display: grid;
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 100px minmax(570px  , auto) 50px;
@@ -62,11 +62,43 @@ body{
 }
 .form-container{
     display:none;
+    position: absolute;
+    
+    width:100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+
 }
 form{
     display:flex;
+    position: absolute;
+    flex-direction: column;
+    width:150px;
+    top:30%;
+    right: 45%;
+    gap:1px;
+}
+
+
+input:focus:invalid{
+    outline: none;
+}
+
+.error{
+    background-color: red;
+    
+    width:100%;
+    font-size: 80%;
+    border-radius: 4px;
+    
     
 }
+span.active{
+    padding: 0.3em;
+}
+
+
+
 .card-container{
     height: 100%;
 
